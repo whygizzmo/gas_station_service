@@ -3,6 +3,7 @@ package kg.itschoolmegacom.gasstationservice.models.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "fuels")
 @Getter
 @Setter
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Fuel {
     @Id
