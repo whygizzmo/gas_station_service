@@ -12,7 +12,9 @@ import java.util.List;
 public interface FuelService {
     ResponseEntity<?> save(FuelDto fuelDto);
 
-    FuelDto calculate(FuelCalculateRequest fuelCalculateRequest);
+    ResponseEntity<?> calculate(FuelCalculateRequest fuelCalculateRequest);
 
     List<Fuel> getFuel();
+
+    Fuel getOne(Long id);
 }

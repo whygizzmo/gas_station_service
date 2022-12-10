@@ -2,6 +2,7 @@ package kg.itschoolmegacom.gasstationservice.service.impl;
 
 import kg.itschoolmegacom.gasstationservice.mappers.FuelMapper;
 import kg.itschoolmegacom.gasstationservice.models.dtos.FuelDto;
+import kg.itschoolmegacom.gasstationservice.models.dtos.HistoryClientFuelDto;
 import kg.itschoolmegacom.gasstationservice.models.dtos.request.FuelCalculateRequest;
 import kg.itschoolmegacom.gasstationservice.models.entity.Fuel;
 import kg.itschoolmegacom.gasstationservice.service.FuelService;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class FuelServiceImpl implements FuelService {
 
 
-//   private Optional<Fuel> fuel = Optional.of(new Fuel());
+    //   private Optional<Fuel> fuel = Optional.of(new Fuel());
     @Autowired
     private FuelRepo fuelRepo;
 
@@ -38,18 +39,28 @@ public class FuelServiceImpl implements FuelService {
     }
 
     @Override
-    public FuelDto calculate(FuelCalculateRequest fuelCalculateRequest) {
+    public ResponseEntity<?> calculate(FuelCalculateRequest fuelCalculateRequest) {
         Fuel fuel;
-        fuel = fuelRepo.findByFuelId(fuelCalculateRequest.getFuelId());
-        System.out.println(fuel.toString());
-        //FuelDto fuelDto = FuelMapper.INSTANCE.toFuelDto;
-          FuelDto fuelDto = FuelMapper.INSTANCE.toFuelDto(fuel);
-        System.err.println(fuelDto.toString());
-        return fuelDto;
+        fuel = fuelRepo.findById(fuelCalculateRequest.getFuelId()).get();
+        FuelDto fuelDto = FuelMapper.INSTANCE.toFuelDto(fuel);
+
+        double resultPrice = fuelDto.getPricePerLiter()*fuelCalculateRequest.getVolume();
+
+
+
+
+        return ResponseEntity.ok(null);//HistoryClientFuelDto
     }
 
     @Override
     public List<Fuel> getFuel() {
-        return fuelRepo.findAll();
+       return fuelRepo.findAll();
+
+    }
+
+    @Override
+    public Fuel getOne(Long id) {
+        Fuel fuel = fuelRepo.findById(id).get();
+        return fuel;
     }
 }

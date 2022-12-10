@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FuelRepo extends JpaRepository<Fuel,Long> {
-    @Query(value = "select * from fuels where id = ?",
+    /*@Query(value = "select * from fuels where id = ?",
             nativeQuery = true)
-    Fuel findByFuelId(Long id);
+    Fuel findByFuelId(Long id);*/
 
 }

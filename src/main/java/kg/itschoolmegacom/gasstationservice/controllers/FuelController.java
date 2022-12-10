@@ -2,6 +2,7 @@ package kg.itschoolmegacom.gasstationservice.controllers;
 
 import kg.itschoolmegacom.gasstationservice.models.dtos.FuelDto;
 import kg.itschoolmegacom.gasstationservice.models.dtos.request.FuelCalculateRequest;
+import kg.itschoolmegacom.gasstationservice.models.entity.Fuel;
 import kg.itschoolmegacom.gasstationservice.service.FuelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,9 @@ public class FuelController {
      @GetMapping("/list")
     public ResponseEntity<?> listFuel(){
          return ResponseEntity.ok(fuelService.getFuel());
+     }
+     @GetMapping("/getOne")
+     public Fuel getOne(Long id){
+         return fuelService.getOne(id);
      }
 }

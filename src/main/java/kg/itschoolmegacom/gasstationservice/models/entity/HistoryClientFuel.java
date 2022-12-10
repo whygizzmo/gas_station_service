@@ -25,6 +25,7 @@ public class HistoryClientFuel {
     @JoinColumn(name = "fuel_id")
     Fuel fuel;
     @ManyToOne
+
     @JoinColumn(name = "client_id")
     Client client;
     double volume;
@@ -37,5 +38,8 @@ public class HistoryClientFuel {
 
     @Enumerated(value = EnumType.ORDINAL)
     PayStatus payStatus;
+
+
+
 
 }

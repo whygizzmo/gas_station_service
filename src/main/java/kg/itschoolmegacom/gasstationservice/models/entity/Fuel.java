@@ -1,10 +1,11 @@
 package kg.itschoolmegacom.gasstationservice.models.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import kg.itschoolmegacom.gasstationservice.mappers.FuelMapper;
+import kg.itschoolmegacom.gasstationservice.models.dtos.FuelDto;
+import kg.itschoolmegacom.gasstationservice.repository.FuelRepo;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
@@ -13,6 +14,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Fuel {
     @Id
@@ -21,4 +24,18 @@ public class Fuel {
     long id;
     String name;
     double pricePerLiter;
+
+    @Autowired
+    private FuelRepo fuelRepo;
+
+    public Fuel(Long id) {
+        Fuel fuelForTransform = fuelRepo.findById(id).get();
+                //fuelMapper.toFuelDto(fuelRepo.findById(id).get());
+        this.id = fuelForTransform.getId();
+        this.name = fuelForTransform.getName();
+        this.pricePerLiter = fuelForTransform.getPricePerLiter();
+        
+
+
+}
 }
